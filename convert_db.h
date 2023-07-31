@@ -32,7 +32,11 @@ class DB_ {
 		void * get_item();
 		bool put_item();
 		virtual bool connect_database(std::string path);
+		virtual bool create_database(std::string name);
 		bool create_db();
+		virtual bool fill_database(DB_ * old_database);
+		virtual void close_db();
+		virtual DBC * get_database();
 };
 
 class Libdb: public DB_ {
@@ -50,7 +54,7 @@ class GDBM_: public DB_ {
 	public:
 		GDBM_();
 		bool create_database(std::string name);
-		bool fill_database(Libdb old_database);
+		bool fill_database(DB_ * old_database);
 		void close_db();
 };
 //https://github.com/LMDB/lmdb/blob/mdb.master/libraries/liblmdb/mtest2.c
@@ -63,7 +67,7 @@ class LMDB_: public DB_ {
 	public:
 		LMDB_();
 		bool create_database(std::string name);
-		bool fill_database(Libdb old_database);
+		bool fill_database(DB_ * old_database);
 		void close_db();
 };
 

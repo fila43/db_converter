@@ -5,17 +5,25 @@
 Libdb::Libdb(){
 	database_type = DB_type::LIBDB;
 };
-bool DB_::connect_database(std::string path){
+bool DB_::connect_database(std::string){
 	return false;
 }
 DB_::DB_(){
 	;
 };
+bool DB_::fill_database(DB_ *) {
+	return false;
+}
+bool DB_::create_database(std::string) {
+	return false;
+}
+DBC * DB_::get_database() {
+	return NULL;
+}
+void DB_::close_db(){}
 bool Libdb::connect_database(std::string path){
 	DB * db;
-	DBT * data, *key;
 	int status;
-//	DBC * cursorp;
 
 	if (db_create(&db, NULL, 0) != 0)
 	//throw exception
@@ -52,12 +60,12 @@ bool GDBM_::create_database(std::string name){
 	return true;
 }
 
-bool GDBM_::fill_database(Libdb old_database){
+bool GDBM_::fill_database(DB_ * old_database){
 	DBT * data_db;
 	DBT * key_db;
 	datum key, value;
 
-	DBC * cursorp = old_database.get_database();
+	DBC * cursorp = old_database->get_database();
 
 	//Alocate libdb record
 	data_db = (DBT*)calloc(1, sizeof(DBT));
@@ -104,13 +112,13 @@ bool LMDB_::create_database(std::string name){
 	return true;
 }
 
-bool LMDB_::fill_database(Libdb old_database){
+bool LMDB_::fill_database(DB_ * old_database){
 	DBT * data_db;
 	DBT * key_db;
 	MDB_val * key;
 	MDB_val * data;
 
-	DBC * cursorp = old_database.get_database();
+	DBC * cursorp = old_database->get_database();
 
 	data_db = (DBT*)calloc(1,sizeof(DBT));
         key_db = (DBT*)calloc(1,sizeof(DBT));

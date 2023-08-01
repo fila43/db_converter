@@ -14,6 +14,7 @@ db\_converter --src SOURCE --dest DEST [ DBTYPE ]
 GDBM is the default one
 
 ## Example
-`./db\_convert --src access.db --dest access.gdbm`
-`./db\_convert --src access.db --dest access.lmdb --lmdb`
+`./db_convert --src access.db --dest access.gdbm`
+
+`./db_convert --src access.db --dest access.lmdb --lmdb`
 * Your new file with converted database will be created

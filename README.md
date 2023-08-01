@@ -7,13 +7,13 @@ requires: libdb-devel, gdbm-devel, lmdb-devel, g++, make
 * Clone the repo
 * Build the binary `make`
 ## Usage
-db\_converter --src SOURCE --dst DEST [ DBTYPE ]
+db\_converter --src SOURCE --dest DEST [ DBTYPE ]
 * SOURCE - path to BerkeleyDB database
 * DEST - file path to be created in the new database format
 * DBTYPE - optional argument `--lmdb` for producing LMDB database or `--gdbm` for GDBM databse
 GDBM is the default one
 
 ## Example
-`./db\_convert --src access.db --dst access.gdbm`
-`./db\_convert --src access.db --dst access.lmdb --lmdb`
+`./db\_convert --src access.db --dest access.gdbm`
+`./db\_convert --src access.db --dest access.lmdb --lmdb`
 * Your new file with converted database will be created

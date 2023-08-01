@@ -22,7 +22,9 @@ enum DB_type {
 	SQLITE,
 	GDBM
 };
-
+/*
+ * "Semi" Abstract class for database all database types
+ */
 class DB_ {
 	protected:
 		DB_type database_type;
@@ -38,7 +40,11 @@ class DB_ {
 		virtual void close_db();
 		virtual DBC * get_database();
 };
-
+/*
+ * Libdb class needs only open and read data from libdb database
+ * connect_database - open database file and stores pointer to database to atributte
+ * get_database - return pointer to database structure
+ */
 class Libdb: public DB_ {
 	private:
 		DBC * cursorp;
@@ -48,7 +54,14 @@ class Libdb: public DB_ {
 		bool connect_database(std::string path);
 		DBC * get_database();
 };
-
+/*
+ * GDBM class provides API for GDBM, allowes to open and create and fill gdbm database
+ * create_database (name) - create database file identified by name variable
+ * fill_database (old_database) - append data from provided libdb database to newly creqated GDBM database
+ * 	it's necessary to call create_database before fill_database
+ *	database cursor of old database is not seeked to the beginning of database after reading
+ * close_db - close database file
+ */
 class GDBM_: public DB_ {
 	GDBM_FILE f;
 	public:
@@ -59,6 +72,10 @@ class GDBM_: public DB_ {
 };
 //https://github.com/LMDB/lmdb/blob/mdb.master/libraries/liblmdb/mtest2.c
 //further inspiration
+/*
+ * LMDB API for creating and filling database file
+ * The API is the same asi in case of GDBM
+ */
 class LMDB_: public DB_ {
 	private:
 		MDB_env * lmdb_database;

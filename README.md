@@ -14,8 +14,10 @@ db\_converter --src SOURCE --dest DEST [ DBTYPE ]
 GDBM is the default one. LMDB needs to have created directory for database files and provide it as parameter DEST
 
 ## Example
+### GDBM
 `./db_convert --src access.db --dest access.gdbm`
 
+### LMDB
 `mkdir lmdb`
 
 `./db_convert --src access.db --dest lmdb --lmdb`

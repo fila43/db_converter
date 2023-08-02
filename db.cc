@@ -90,24 +90,31 @@ void GDBM_::close_db(){
 
 LMDB_::LMDB_(){
 	database_type = DB_type::LMDB;
+
 }
 bool LMDB_::create_database(std::string name){
-	if (mdb_env_create(&(this->lmdb_database)) != 0){
+	if (mdb_env_create(&lmdb_database) != 0){
                 std::cerr<<"Can't create LMDB database handler\n";
                 return false;
         }
         /* default size 10485760 from documentation */
-        if (mdb_env_set_mapsize(this->lmdb_database,10485760) != 0)
+        if (mdb_env_set_mapsize(lmdb_database,10485760) != 0){
+	 	return false;
+	}
+	int status;
+        status = mdb_env_open(lmdb_database, name.data(),0,0666);
+       	if (status!= 0){
+		std::cerr<<"error in mdb_env_open - status: "<<status<<std::endl;
                 return false;
+	}
 
-        if (mdb_env_open(this->lmdb_database, name.data(),0,0666) != 0)
+        if (mdb_txn_begin(lmdb_database, NULL, 0, &lmdb_transaction) != 0){
                 return false;
+	}
 
-        if (mdb_txn_begin(this->lmdb_database, NULL, 0, &(this->lmdb_transaction)) != 0)
+        if (mdb_dbi_open(lmdb_transaction, NULL, MDB_DUPSORT, &database_handle) != 0){
                 return false;
-
-        if (mdb_dbi_open(this->lmdb_transaction, NULL, MDB_DUPSORT, &(this->database_handle)) != 0)
-                return false;
+	}
 
 	return true;
 }
@@ -117,7 +124,6 @@ bool LMDB_::fill_database(DB_ * old_database){
 	DBT * key_db;
 	MDB_val * key;
 	MDB_val * data;
-
 	DBC * cursorp = old_database->get_database();
 
 	data_db = (DBT*)calloc(1,sizeof(DBT));

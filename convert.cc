@@ -8,7 +8,7 @@ void help(int e){
 	std::cout<<" --src\t\tsource database file in BerkeleyDB format"<<std::endl;
 	std::cout<<" --dst\t\tfile to be created in GDBM/LMDB format"<<std::endl;
 	std::cout<<" --gdbm\t\tDBTYPE - specifies output database type to GDBM"<<std::endl;
-	std::cout<<" --lmdb\t\tDBTYPE - specifies output database type to LMDB"<<std::endl;
+	std::cout<<" --lmdb\t\tDBTYPE - specifies output database type to LMDB. LMDB database consists of multiple files. In case of using LMDB output directory must be created and provided as DEST"<<std::endl;
 	std::cout<<std::endl;
 	std::cout<<"If DBTYPE is not set, GDBM will be used as default"<<std::endl;
 	std::cout<<std::endl;

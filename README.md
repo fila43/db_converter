@@ -11,10 +11,11 @@ db\_converter --src SOURCE --dest DEST [ DBTYPE ]
 * SOURCE - path to BerkeleyDB database
 * DEST - file path to be created in the new database format
 * DBTYPE - optional argument `--lmdb` for producing LMDB database or `--gdbm` for GDBM databse
-GDBM is the default one
+GDBM is the default one. LMDB needs to have created directory for database files and provide it as parameter DEST
 
 ## Example
 `./db_convert --src access.db --dest access.gdbm`
 
-`./db_convert --src access.db --dest access.lmdb --lmdb`
+`mkdir lmdb`
+`./db_convert --src access.db --dest lmdb --lmdb`
 * Your new file with converted database will be created

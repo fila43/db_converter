@@ -17,5 +17,6 @@ GDBM is the default one. LMDB needs to have created directory for database files
 `./db_convert --src access.db --dest access.gdbm`
 
 `mkdir lmdb`
+
 `./db_convert --src access.db --dest lmdb --lmdb`
 * Your new file with converted database will be created

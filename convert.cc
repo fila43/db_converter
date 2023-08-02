@@ -2,7 +2,17 @@
 #include <getopt.h>
 
 void help(int e){
-	std::cout<<"Help TBD"<<std::endl;
+	std::cout<<"Usage: db_converter --src SRC --dest DEST [DBTYPE]"<<std::endl;
+	std::cout<<"Convert database from BerkeleyDB format to GDBM/LMDB"<<std::endl;
+	std::cout<<std::endl;
+	std::cout<<" --src\t\tsource database file in BerkeleyDB format"<<std::endl;
+	std::cout<<" --dst\t\tfile to be created in GDBM/LMDB format"<<std::endl;
+	std::cout<<" --gdbm\t\tDBTYPE - specifies output database type to GDBM"<<std::endl;
+	std::cout<<" --lmdb\t\tDBTYPE - specifies output database type to LMDB"<<std::endl;
+	std::cout<<std::endl;
+	std::cout<<"If DBTYPE is not set, GDBM will be used as default"<<std::endl;
+	std::cout<<std::endl;
+	std::cout<<"Report bugs to: <https://github.com/fila43/db_converter>"<<std::endl;
 	exit(e);
 }
 

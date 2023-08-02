@@ -10,7 +10,7 @@ requires: libdb-devel, gdbm-devel, lmdb-devel, g++, make
 db\_converter --src SOURCE --dest DEST [ DBTYPE ]
 * SOURCE - path to BerkeleyDB database
 * DEST - file path to be created in the new database format
-* DBTYPE - optional argument `--lmdb` for producing LMDB database or `--gdbm` for GDBM databse
+* DBTYPE - optional argument `--lmdb` for producing LMDB database.
 GDBM is the default one. LMDB needs to have created directory for database files and provide it as parameter DEST
 
 ## Example

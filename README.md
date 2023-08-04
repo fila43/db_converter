@@ -22,3 +22,7 @@ GDBM is the default one. LMDB needs to have created directory for database files
 
 `./db_convert --src access.db --dest lmdb --lmdb`
 * Your new file with converted database will be created
+
+### Example systemd service
+The directory `units` contains example of the service file. It could be used as template
+for database conversion within system upgrade.

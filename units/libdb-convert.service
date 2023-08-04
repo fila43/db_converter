@@ -1,0 +1,13 @@
+[Unit]
+Description=Convert libdb(BerkeleyDB) database
+After=local-fs.target
+ConditionPathExists=/etc/vsftpd/example
+ConditionPathExists=!/etc/vsftpd/example.gdbm
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/db_converter --src example --dest example.gdbm
+RemainAfterExit=true
+
+[Install]
+WantedBy=default.target

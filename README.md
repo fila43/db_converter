@@ -6,6 +6,7 @@ requires: libdb-devel, gdbm-devel, lmdb-devel, g++, make
 ## Build
 * Clone the repo
 * Build the binary `make`
+* For static linking of libdb use `make static`
 ## Usage
 db\_converter --src SOURCE --dest DEST [ DBTYPE ]
 * SOURCE - path to BerkeleyDB database

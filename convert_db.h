@@ -39,6 +39,7 @@ class DB_ {
 		virtual bool fill_database(DB_ * old_database);
 		virtual void close_db();
 		virtual DBC * get_database();
+    virtual ~DB_();
 };
 /*
  * Libdb class needs only open and read data from libdb database

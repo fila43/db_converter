@@ -21,6 +21,10 @@ DBC * DB_::get_database() {
 	return NULL;
 }
 void DB_::close_db(){}
+
+DB_::~DB_() {
+}
+
 bool Libdb::connect_database(std::string path){
 	DB * db;
 	int status;

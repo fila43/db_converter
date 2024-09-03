@@ -25,7 +25,7 @@ int main(int argc, char* argv[]){
         	{"src", required_argument, NULL, 's'},
         	{"lmdb", no_argument, NULL, 'l'},
         	{"help", no_argument, NULL, 'h'},
-		{0}
+        	{0, 0, 0, 0}
 	};
 	int option_index = 0;
 	while (1) {

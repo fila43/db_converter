@@ -54,18 +54,29 @@ int main(int argc, char* argv[]){
 
 
 	DB_ * x = new Libdb();
-	x->connect_database(src);
+	if (!x->connect_database(src)) {
+	// error is printed in the connect_database function
+	delete x;
+	return 1;
+	}
 	DB_ *b;
 	if (lmdb)
 		b = new LMDB_();
 	else
 		b = new GDBM_();
-	b->create_database(dst);
-	if (!b->fill_database(x)){
-		std::cerr<<"database filling failed\n";
+	if (!b->create_database(dst)) {
+		std::cerr<<"Failed to create destination database\n";
+		delete x;
+		delete b;
 		return 1;
 	}
-    	b->close_db();
+	if (!b->fill_database(x)){
+		std::cerr<<"database filling failed\n";
+		delete x;
+		delete b;
+		return 1;
+	}
+	b->close_db();
 	delete x;
 	delete b;
 	return 0;

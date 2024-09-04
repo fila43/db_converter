@@ -39,7 +39,7 @@ class DB_ {
 		virtual bool fill_database(DB_ * old_database);
 		virtual void close_db();
 		virtual DBC * get_database();
-    virtual ~DB_();
+		virtual ~DB_();
 };
 /*
  * Libdb class needs only open and read data from libdb database
@@ -54,6 +54,7 @@ class Libdb: public DB_ {
 		Libdb();
 		bool connect_database(std::string path);
 		DBC * get_database();
+		void close_db();
 };
 /*
  * GDBM class provides API for GDBM, allowes to open and create and fill gdbm database

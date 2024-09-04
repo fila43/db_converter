@@ -52,6 +52,11 @@ DBC * Libdb::get_database(){
 	return this->cursorp;
 }
 
+void Libdb::close_db() {
+	cursorp->close(cursorp);
+	db->close(db, 0);
+}
+
 GDBM_::GDBM_(){
 	database_type = DB_type::GDBM;
 }

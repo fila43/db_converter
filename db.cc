@@ -93,6 +93,8 @@ bool GDBM_::fill_database(DB_ * old_database){
 		if (status != 0)
 			return false;
 	}
+	free(data_db);
+	free(key_db);
 	return true;
 }
 

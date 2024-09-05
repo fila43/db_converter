@@ -67,20 +67,15 @@ int main(int argc, char* argv[]){
 	if (!b->create_database(dst)) {
 		std::cerr<<"Failed to create destination database\n";
 		delete x;
-		x->close_db();
 		delete b;
 		return 1;
 	}
 	if (!b->fill_database(x)){
 		std::cerr<<"database filling failed\n";
-		x->close_db();
-		b->close_db();
 		delete x;
 		delete b;
 		return 1;
 	}
-	x->close_db();
-	b->close_db();
 	delete x;
 	delete b;
 	return 0;

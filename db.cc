@@ -1,10 +1,5 @@
 #include "convert_db.h"
 
-
-
-Libdb::Libdb(){
-	database_type = DB_type::LIBDB;
-};
 bool DB_::connect_database(std::string){
 	return false;
 }
@@ -21,6 +16,14 @@ DBC * DB_::get_database() {
 	return NULL;
 }
 void DB_::close_db(){}
+
+DB_::~DB_() {
+}
+
+Libdb::Libdb(){
+	database_type = DB_type::LIBDB;
+};
+
 bool Libdb::connect_database(std::string path){
 	DB * db;
 	int status;
@@ -46,6 +49,15 @@ bool Libdb::connect_database(std::string path){
 
 DBC * Libdb::get_database(){
 	return this->cursorp;
+}
+
+void Libdb::close_db() {
+	cursorp->close(cursorp);
+	db->close(db, 0);
+}
+
+Libdb::~Libdb() {
+	close_db();
 }
 
 GDBM_::GDBM_(){
@@ -81,11 +93,17 @@ bool GDBM_::fill_database(DB_ * old_database){
 		if (status != 0)
 			return false;
 	}
+	free(data_db);
+	free(key_db);
 	return true;
 }
 
 void GDBM_::close_db(){
 	gdbm_close(this->f);
+}
+
+GDBM_::~GDBM_() {
+	close_db();
 }
 
 LMDB_::LMDB_(){
@@ -161,4 +179,6 @@ void LMDB_::close_db(){
 	mdb_env_close(this->lmdb_database);
 }
 
-
+LMDB_::~LMDB_() {
+	close_db();
+}

@@ -37,8 +37,9 @@ class DB_ {
 		virtual bool create_database(std::string name);
 		bool create_db();
 		virtual bool fill_database(DB_ * old_database);
-		virtual void close_db();
+		virtual void close_db() = 0;
 		virtual DBC * get_database();
+		virtual ~DB_();
 };
 /*
  * Libdb class needs only open and read data from libdb database
@@ -53,6 +54,8 @@ class Libdb: public DB_ {
 		Libdb();
 		bool connect_database(std::string path);
 		DBC * get_database();
+		void close_db();
+		~Libdb();
 };
 /*
  * GDBM class provides API for GDBM, allowes to open and create and fill gdbm database
@@ -69,6 +72,7 @@ class GDBM_: public DB_ {
 		bool create_database(std::string name);
 		bool fill_database(DB_ * old_database);
 		void close_db();
+		~GDBM_();
 };
 //https://github.com/LMDB/lmdb/blob/mdb.master/libraries/liblmdb/mtest2.c
 //further inspiration
@@ -86,5 +90,6 @@ class LMDB_: public DB_ {
 		bool create_database(std::string name);
 		bool fill_database(DB_ * old_database);
 		void close_db();
+		~LMDB_();
 };
 

@@ -22,6 +22,8 @@ DB_::~DB_() {
 
 Libdb::Libdb(){
 	database_type = DB_type::LIBDB;
+	cursorp = nullptr;
+	db = nullptr;
 };
 
 bool Libdb::connect_database(std::string path){
@@ -52,8 +54,10 @@ DBC * Libdb::get_database(){
 }
 
 void Libdb::close_db() {
-	cursorp->close(cursorp);
-	db->close(db, 0);
+	if (cursorp != nullptr)
+		cursorp->close(cursorp);
+	if (db != nullptr)
+		db->close(db, 0);
 }
 
 Libdb::~Libdb() {
